@@ -7,7 +7,7 @@ export interface IUser extends Document {
     confirmed: boolean
 }
 
-const UserSchema = new Schema({
+const UserSchema: Schema = new Schema({
     email: {
         type: String,
         required: true,

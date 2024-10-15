@@ -17,7 +17,7 @@ export interface ITask extends Document {
     status: TaskStatus
 }
 
-const TaskSchema = new Schema({
+const TaskSchema: Schema = new Schema({
     name: {
         type: String,
         required: true,
