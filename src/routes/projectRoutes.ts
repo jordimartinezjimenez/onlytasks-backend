@@ -9,6 +9,8 @@ import { authenticate } from "../middleware/auth"
 
 const router = Router()
 
+router.use(authenticate)
+
 router.get("/", ProjectController.getAllProjects)
 
 router.get("/:id",
@@ -18,7 +20,6 @@ router.get("/:id",
 )
 
 router.post("/",
-    authenticate,
     body("projectName")
         .notEmpty().withMessage("Project Name is required"),
     body("clientName")
