@@ -4,7 +4,7 @@ import { ProjectController } from "../controllers/ProjectController"
 import { handleInputErrors } from "../middleware/validation"
 import { TaskController } from "../controllers/TaskController"
 import { projectExists } from "../middleware/project"
-import { taskBelongsToProject, taskExists } from "../middleware/task"
+import { hasAuthorization, taskBelongsToProject, taskExists } from "../middleware/task"
 import { authenticate } from "../middleware/auth"
 import { TeamMemberController } from "../controllers/TeamController"
 
@@ -54,6 +54,7 @@ router.param("projectId", projectExists)
 
 router.post("/:projectId/tasks",
     // projectExists,
+    hasAuthorization,
     body("name")
         .notEmpty().withMessage("Task Name is required"),
     body("description")
@@ -76,6 +77,7 @@ router.get("/:projectId/tasks/:taskId",
 )
 
 router.put("/:projectId/tasks/:taskId",
+    hasAuthorization,
     param("projectId").isMongoId().withMessage("Invalid ID"),
     body("name")
         .notEmpty().withMessage("Task Name is required"),
@@ -86,6 +88,7 @@ router.put("/:projectId/tasks/:taskId",
 )
 
 router.delete("/:projectId/tasks/:taskId",
+    hasAuthorization,
     param("projectId").isMongoId().withMessage("Invalid ID"),
     handleInputErrors,
     TaskController.deleteTask
