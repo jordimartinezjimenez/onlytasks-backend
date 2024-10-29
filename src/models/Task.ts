@@ -15,7 +15,11 @@ export interface ITask extends Document {
     description: string
     project: Types.ObjectId
     status: TaskStatus
-    completedBy: Types.ObjectId
+    completedBy: {
+        user: Types.ObjectId
+        status: TaskStatus
+        updatedAt: Date
+    }[]
 }
 
 const TaskSchema: Schema = new Schema({
@@ -38,11 +42,24 @@ const TaskSchema: Schema = new Schema({
         enum: Object.values(taskStatus),
         default: taskStatus.PENDING
     },
-    completedBy: {
-        type: Types.ObjectId,
-        ref: "User",
-        default: null
-    }
+    completedBy: [
+        {
+            user: {
+                type: Types.ObjectId,
+                ref: "User",
+                default: null
+            },
+            status: {
+                type: String,
+                enum: Object.values(taskStatus),
+                default: taskStatus.PENDING
+            },
+            updatedAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ]
 }, { timestamps: true })
 
 const Task = mongoose.model<ITask>("Task", TaskSchema)
