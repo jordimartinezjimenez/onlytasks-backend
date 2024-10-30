@@ -20,6 +20,7 @@ export interface ITask extends Document {
         status: TaskStatus
         updatedAt: Date
     }[]
+    notes: Types.ObjectId[]
 }
 
 const TaskSchema: Schema = new Schema({
@@ -58,6 +59,12 @@ const TaskSchema: Schema = new Schema({
                 type: Date,
                 default: Date.now
             }
+        }
+    ],
+    notes: [
+        {
+            type: Types.ObjectId,
+            ref: "Note"
         }
     ]
 }, { timestamps: true })
