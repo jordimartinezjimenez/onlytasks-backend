@@ -226,7 +226,7 @@ export class AuthController {
 
         const isPasswordCorrect = await checkPassword(currentPassword, user.password)
         if (!isPasswordCorrect) {
-            const error = new Error("Incorrect password")
+            const error = new Error("Incorrect current password")
             res.status(401).json({ error: error.message })
             return
         }
@@ -238,5 +238,20 @@ export class AuthController {
         } catch (error) {
             res.status(500).json({ error: "There was an error" })
         }
+    }
+
+    static checkPassword = async (req: Request, res: Response) => {
+        const { password } = req.body
+
+        const user = await User.findById(req.user.id)
+
+        const isPasswordCorrect = await checkPassword(password, user.password)
+        if (!isPasswordCorrect) {
+            const error = new Error("Incorrect password")
+            res.status(401).json({ error: error.message })
+            return
+        }
+
+        res.send("Password is correct")
     }
 }
