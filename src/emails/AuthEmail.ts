@@ -9,7 +9,7 @@ interface IEmail {
 export class AuthEmail {
     static sendConfirmationEmail = async (user: IEmail) => {
         await transporter.sendMail({
-            from: "OnlyTasks <onlytasks.com>",
+            from: "OnlyTasks <jordimj63@gmail.com>",
             to: user.email,
             subject: "OnlyTasks - Confirm your account",
             text: "OnlyTasks - Confirm your account",
@@ -19,7 +19,7 @@ export class AuthEmail {
                             <p style="font-size: 16px; line-height: 1.5; color: #555;">You've created your <strong>OnlyTasks</strong> account - you're almost there! You just need to confirm your account to start using it.</p>
                             <p style="font-size: 16px; line-height: 1.5; color: #555;">To confirm your account, please visit the following link:</p>
                             <div style="text-align: center; margin: 20px 0;">
-                                <a href="${process.env.FRONTEND_URL}/auth/confirm-account" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">Confirm Account</a>
+                                <a href="${process.env.FRONTEND_URL}/auth/confirm-account" style="display: inline-block; padding: 10px 20px; background-color: #10a09e; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">Confirm Account</a>
                             </div>
                             <p style="font-size: 16px; line-height: 1.5; color: #555;">You can also enter the following code to confirm your account:</p>
                         <div style="text-align: center; font-size: 18px; font-weight: bold; margin: 20px 0;"> ${user.token} </div>
@@ -33,7 +33,7 @@ export class AuthEmail {
 
     static sendPasswordResetToken = async (user: IEmail) => {
         await transporter.sendMail({
-            from: "OnlyTasks <onlytasks.com>",
+            from: "OnlyTasks <jordimj63@gmail.com>",
             to: user.email,
             subject: "OnlyTasks - Reset your password",
             text: "OnlyTasks - Reset your password",
@@ -43,7 +43,7 @@ export class AuthEmail {
                             <p style="font-size: 16px; line-height: 1.5; color: #555;">You have requested to reset your <strong>OnlyTasks</strong> account password</p>
                             <p style="font-size: 16px; line-height: 1.5; color: #555;">To reset your password, please visit the following link:</p>
                             <div style="text-align: center; margin: 20px 0;">
-                                <a href="${process.env.FRONTEND_URL}/auth/confirm-account" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">Reset Password</a>
+                                <a href="${process.env.FRONTEND_URL}/auth/new-password" style="display: inline-block; padding: 10px 20px; background-color: #10a09e; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;">Reset Password</a>
                             </div>
                             <p style="font-size: 16px; line-height: 1.5; color: #555;">And enter the following code to confirm your account and be able to change your password:</p>
                         <div style="text-align: center; font-size: 18px; font-weight: bold; margin: 20px 0;"> ${user.token} </div>
